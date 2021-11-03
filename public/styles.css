@@ -1,0 +1,155 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+html{
+  font-size:16px;
+}
+
+.ui .main .container {
+  margin-bottom:100px;
+  min-height: 100vh;
+}
+
+.index-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:white;
+  font-size: 100px;
+  font-family: 'Permanent Marker';
+  height: 50%;
+  width:100%;
+  background-image: url("./images/toine-g-XP-J5O6A4Ko-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 -300px;
+}
+
+.home-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-header{
+  display: flex;
+  margin-bottom: 30px;
+  align-items: center;
+  column-gap: 20px;
+}
+.form-header > *{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
+h1{
+  margin-top: 0;
+}
+.form-image{
+  
+  background-image: url("./images/toine-g-XP-J5O6A4Ko-unsplash.jpg");
+  background-size: cover;
+  border-radius: 50%;
+  width:70px;
+  height:70px
+}
+.players {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 900px;
+  row-gap: 20px;
+  margin-bottom: 100px;
+}
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+}
+
+.player-name {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.rallyes {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.rallye {
+  color: rgb(0, 137, 196);
+}
+
+.my-container{
+  min-height: 100vh;
+}
+.participations-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: rgb(0, 137, 196);
+  width: 100%;
+  margin-bottom: 5px;
+  color: white;
+  column-gap: 20px;
+  border-radius:20px 20px 0 0;
+}
+
+.participations {
+  display: flex;
+  column-gap: 20px;
+  border-bottom: 1px solid grey;
+  width: 100%;
+}
+
+.temps {
+  display: flex;
+  flex-direction: row;
+}
+
+.time-fields {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.input-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+}
+.input {
+  display: flex;
+  max-width: 70px;
+  align-items: center;
+}
+.classement-header-item {
+  display: flex;
+  margin-top: 5px;
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+}
+.classement-header-item,
+.classement-body-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+.my-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:100px;
+  background-color:black;
+  width: 100%;
+  color:white;
+}

@@ -1,0 +1,32 @@
+<%- include('header') -%>
+
+<div class="ui main container">
+  <h1>
+    <% if(participations[0].rallye_name === "Aucune participation") { %> <%=
+    participations[0].rallye_name %> <% } else { %> Classement par rallye >
+    <span class="rallye"><%= participations[0].rallye_name %></span>
+    <% } %>
+  </h1>
+  
+  <div class="my-container">
+    <div class="participations-header">
+      <div class="classement-header-item">Classement</div>
+      <div class="classement-header-item">Nom</div>
+      <div class="classement-header-item">Points</div>
+      <div class="classement-header-item">Temps</div>
+    </div>
+    <% let i = 1; for (participation of participations) { %>
+    <div class="participations">
+      <div class="classement-body-item">#<%= i %></div>
+      <div class="classement-body-item"><%= participation.player_name %></div>
+      <div class="classement-body-item"><%= participation.points %></div>
+      <div class="classement-body-item temps">
+        <div><%= participation.minutes.toString().padStart(2, '0')%>:</div>
+        <div><%= participation.seconds.toString().padStart(2, '0') %>:</div>
+        <div><%= participation.milliseconds.toString().padStart(3, '0') %></div>
+      </div>
+    </div>
+    <% i++} %> 
+    </div>
+    <%- include('footer') -%>
+

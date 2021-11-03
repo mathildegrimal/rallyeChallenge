@@ -1,0 +1,27 @@
+<%- include('header') -%>
+
+<div class="ui main container">
+  <h1>
+    Classement >
+    <span class="rallye">Général</span>
+  </h1>
+  <div class="my-container">
+  <div class="participations-header">
+    <div class="classement-header-item">Classement</div>
+    <div class="classement-header-item">Nom</div>
+    <div class="classement-header-item">Points</div>
+  </div>
+  <% let i = 1; for (ranking of rankings) { %>
+  <div class="participations">
+    <div class="classement-body-item">
+      <% if(i === 1){ %>
+        <img src="https://img.icons8.com/color/35/000000/trophy.png"/>
+      <% } %>
+      #<%= i %>
+    </div>
+    <div class="classement-body-item"><%= ranking.player_name %></div>
+    <div class="classement-body-item"><%= ranking.points %></div>
+  </div>
+  <% i++} %>
+</div>
+  <%- include('footer') -%>

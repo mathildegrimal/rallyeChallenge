@@ -1,0 +1,51 @@
+<%- include('header') -%>
+<div class="index-header">Rallye Challenge</div>
+<div class="ui main container">
+  <div class="ui comments">
+    <h2 class="ui dividing header">Rallyes</h2>
+    <div class="home-links">
+    <a href="/rallyes/form" class="header item">
+      <button class="ui yellow submit icon button">
+        Ajouter un rallye
+      </button>
+    </a>
+  </div>
+    <h5>Cliquez sur le rallye pour afficher le classement de l'épreuve</h5>
+  </div>
+  <div class="rallyes">
+    <% for (rallye of rallyes) { %>
+    <a href="/participations/get/<%= rallye.rallye_id %>">
+      <button class="ui pink submit icon button">
+        <%= rallye.rallye_name %>
+      </button>
+    </a>
+    <% } %>
+  </div>
+  
+  <div class="ui comments">
+    <h2 class="ui dividing header">Joueurs</h2>
+    <div class="home-links">
+      <a href="/players/form" class="header item">
+        <button class="ui yellow submit icon button">
+          Ajouter un joueur
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="players">
+    <% let i = 0; for (player of players) { %>
+    <div class="player">
+      <a class="avatar">
+        <img
+          width="50px"
+          src="https://randomuser.me/api/portraits/lego/<%=i%>.jpg"
+          alt="avatar"
+        />
+      </a>
+      <div class="player-name"><%= player.player_name %></div>
+    </div>
+    <% if(i<9) { i++; } else { i = 0;}} %>
+  </div>
+  
+  <%- include('footer') -%>
+

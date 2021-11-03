@@ -1,0 +1,18 @@
+<%- include('header') -%>
+        <div class="ui main container">
+            <div class="my-container">
+                <div class="form-header">
+                    <div class="form-image"></div>
+                    <h1> Ajouter un rallye </h1>
+                </div>
+                <form action="/rallyes/insert" method="post" class='ui form'>
+                    <div class="field">
+                        <label for="name">Nom du Rallye</label>
+                        <input name="name" id="name"></input>
+                    </div>
+                    <button type="submit" class="ui pink button">
+                        Envoyer
+                    </button>
+                </form>
+            </div>
+<%- include('footer') -%>

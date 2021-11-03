@@ -1,0 +1,4 @@
+SELECT sum(points), player_name from participations 
+inner join players 
+on participations.player_id = players.player_id 
+group by participations.player_id order by points DESC

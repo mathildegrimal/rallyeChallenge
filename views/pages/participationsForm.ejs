@@ -1,0 +1,71 @@
+<%- include('header') -%>
+<div class="ui main container">
+  <div class="my-container">
+    <div class="form-header">
+        <div class="form-image"></div>
+        <h1> Ajouter un score </h1>
+    </div>
+    <form action="/participations/insert" method="post" class="ui form">
+        <div class="field">
+        <label for="player">Joueur</label>
+        <select name="player" id="player">
+            <% for(player of players) { %>
+            <option value="<%= player.player_id %>">
+            <%= player.player_name %>
+            </option>
+            <% } %>
+        </select>
+        </div>
+        <div class="field">
+        <label for="rallye">Rallye</label>
+        <select name="rallye" id="rallye">
+            <% for(rallye of rallyes) {%>
+            <option value="<%= rallye.rallye_id%>">
+            <%= rallye.rallye_name %>
+            </option>
+            <% } %>
+        </select>
+        </div>
+        <div class="field">
+        <label for="time">Temps :</label>
+        <div class="time-fields">
+            <div class="input-label">M</div>
+            <div class="input-label">S</div>
+            <div class="input-label">MS</div>
+        </div>
+        <div class="time-fields">
+            <input
+            class="input"
+            type="number"
+            name="minutes"
+            id="minutes"
+            min="0"
+            max="60"
+            value="0"
+            />
+            <input
+            class="input"
+            type="number"
+            name="seconds"
+            min="0"
+            max="60"
+            id="seconds"
+            value="0"
+            />
+            <input
+            class="input"
+            type="number"
+            name="milliseconds"
+            min="0"
+            max="999"
+            id="milliseconds"
+            value="0"
+            />
+        </div>
+        </div>
+        <button type="submit" class="ui pink button">
+        Envoyer
+        </button>
+    </form>
+</div>
+  <%- include('footer') -%>
