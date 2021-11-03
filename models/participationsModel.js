@@ -41,7 +41,6 @@ class Participations {
       },
       function (error, results, fields) {
         if (error) throw error;
-        //console.log(results);
       }
     );
   }

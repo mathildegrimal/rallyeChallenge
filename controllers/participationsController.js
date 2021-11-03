@@ -1,9 +1,9 @@
-const participations = require("../models/participationsModel");
+const participationsModel = require("../models/participationsModel");
 const players = require("../models/playersModel");
 const rallyes = require("../models/rallyesModel");
 
 async function getParticipationsByRallye(req, res) {
-  participations.findAll(function (participations) {
+  participationsModel.findAll(function (participations) {
     if (participations.length === 0) {
       participations.push({
         rallye_name: "Aucune participation",
@@ -19,8 +19,7 @@ async function getParticipationsByRallye(req, res) {
 }
 
 async function getGeneralRanking(req, res) {
-  participations.getGeneralRanking(function (rankings) {
-    //console.log(rankings);
+  participationsModel.getGeneralRanking(function (rankings) {
     res.render("pages/generalRanking", { rankings: rankings });
   });
 }
@@ -50,23 +49,23 @@ async function createParticipation(req, res) {
   ) {
     res.redirect(`/participations/form`);
   } else {
-    const participationCreated = participations.create(
+    participationsModel.create(
       req.body.player,
       req.body.rallye,
       req.body.minutes,
       req.body.seconds,
       req.body.milliseconds
     );
-    if (participationCreated) {
-      participations.generateScore(req.body.rallye);
+    
+    setTimeout(() => {
+      participationsModel.generateScore(req.body.rallye);
       setTimeout(() => {
         res.redirect(`/participations/get/${req.body.rallye}`);
+      },200)
       }, 200);
-    } else {
-      res.redirect(`/participations/form`);
-    }
+    } 
   }
-}
+
 
 exports.getParticipationsByRallye = getParticipationsByRallye;
 exports.createParticipation = createParticipation;

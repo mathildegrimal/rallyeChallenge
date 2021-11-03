@@ -7,7 +7,6 @@ class Players {
       { player_name: name },
       function (error, results, fields) {
         if (error) throw error;
-        //console.log(results);
       }
     );
   }
