@@ -43,11 +43,13 @@ html{
   align-items:center;
 }
 
-h1{
-  margin-top: 0;
+.form-title, .page-title, .section-title{
+ margin-top: 0;
+ font-family: 'Permanent Marker';
+ font-size:40px;
 }
+
 .form-image{
-  
   background-image: url("./images/toine-g-XP-J5O6A4Ko-unsplash.jpg");
   background-size: cover;
   border-radius: 50%;
