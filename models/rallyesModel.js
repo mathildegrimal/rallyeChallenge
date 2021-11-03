@@ -1,8 +1,8 @@
-let connexion = require("../config/db");
+let pool = require("../config/db");
 
 class Rallyes {
   static async create(name) {
-    connexion.query(
+    pool.query(
       "INSERT INTO rallyes SET ?",
       { rallye_name: name },
       function (error, results, fields) {
@@ -13,7 +13,7 @@ class Rallyes {
   }
 
   static async findAll(cb) {
-    connexion.query("SELECT * FROM rallyes", (error, results) => {
+    pool.query("SELECT * FROM rallyes", (error, results) => {
       if (error) throw error;
       cb(results);
     });

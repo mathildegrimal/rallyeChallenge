@@ -1,8 +1,8 @@
-let connexion = require("../config/db");
+let pool = require("../config/db");
 
 class Players {
   static async create(name) {
-    connexion.query(
+    pool.query(
       "INSERT INTO players SET ?",
       { player_name: name },
       function (error, results, fields) {
@@ -13,7 +13,7 @@ class Players {
   }
 
   static async findAll(cb) {
-    connexion.query("SELECT * FROM players", (error, results) => {
+    pool.query("SELECT * FROM players", (error, results) => {
       if (error) throw error;
       cb(results);
     });

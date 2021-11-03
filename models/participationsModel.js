@@ -1,7 +1,7 @@
-const connexion = require("../config/db");
+const pool = require("../config/db");
 class Participations {
   static async generateScore(rallye) {
-    connexion.query(
+    pool.query(
       "SELECT  * from participations where rallye_id = ? order by total_time desc",
       [rallye],
       (error, results) => {
@@ -9,7 +9,7 @@ class Participations {
         let points = 0;
         for (const result of results) {
           let data = [points, result.participation_id];
-          connexion.query(
+          pool.query(
             "UPDATE participations SET points = ? WHERE participation_id = ?",
             data,
             (error, results) => {
@@ -28,7 +28,7 @@ class Participations {
       parseInt(seconds) +
       parseInt(milliseconds) / 1000;
 
-    connexion.query(
+    pool.query(
       "INSERT INTO participations SET ?",
       {
         player_id: parseInt(player),
@@ -46,7 +46,7 @@ class Participations {
     );
   }
   static async findAll(cb, id) {
-    connexion.query(
+    pool.query(
       "SELECT player_name, rallye_name, points, minutes, seconds, milliseconds FROM participations " +
         "inner join players on players.player_id = participations.player_id " +
         "inner join rallyes on rallyes.rallye_id = participations.rallye_id " +
@@ -60,7 +60,7 @@ class Participations {
   }
 
   static async getGeneralRanking(cb) {
-    connexion.query(
+    pool.query(
       "SELECT sum(points) as points, player_name from participations " +
         "inner join players " +
         "on participations.player_id = players.player_id " +
