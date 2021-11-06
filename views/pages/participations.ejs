@@ -14,6 +14,7 @@
       <div class="classement-header-item">Nom</div>
       <div class="classement-header-item">Points</div>
       <div class="classement-header-item">Temps</div>
+      <div class="classement-header-item"></div>
     </div>
     <% let i = 1; for (participation of participations) { %>
     <div class="participations">
@@ -25,8 +26,26 @@
         <div><%= participation.seconds.toString().padStart(2, '0') %>:</div>
         <div><%= participation.milliseconds.toString().padStart(3, '0') %></div>
       </div>
+      
+      <div class="classement-body-item">
+        <% if(participations[0].rallye_name !== "Aucune participation") { %> 
+        <a href='/participations/delete/<%=participation.rallyeId%>/<%=participation.participation_id%>'><button class="ui red submit icon button">Supprimer</button></a>
+        <% } else { %>
+        
+        <% } %>
+      </div>
     </div>
     <% i++} %> 
+    
+    <div class="ui comments">
+    <div class="home-links">
+      <a href="/participations/form/<%=participations[0].rallye_name%>" class="header item">
+        <button class="ui yellow submit icon button">
+          Ajouter un temps
+        </button>
+      </a>
     </div>
+    </div>
+</div>
     <%- include('footer') -%>
 

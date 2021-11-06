@@ -7,6 +7,19 @@ class Players {
       { player_name: name },
       function (error, results, fields) {
         if (error) throw error;
+        return results;
+      }
+    );
+  }
+
+  static async delete(id, cb) {
+    let status = 0;
+    pool.query(
+      "DELETE FROM players WHERE player_id = ?",
+      id,
+      function (error) {
+        if (error) cb();
+        cb()
       }
     );
   }

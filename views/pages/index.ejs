@@ -14,11 +14,10 @@
   </div>
   <div class="rallyes">
     <% for (rallye of rallyes) { %>
-    <a href="/participations/get/<%= rallye.rallye_id %>">
-      <button class="ui pink submit icon button">
-        <%= rallye.rallye_name %>
-      </button>
-    </a>
+      <div class="ui buttons">
+        <a href="/participations/get/<%= rallye.rallye_id %>" class="ui pink submit icon button"><%= rallye.rallye_name %></a>
+        <a href="/rallyes/delete/<%= rallye.rallye_id %>"class="ui red submit icon button"><i class="trash icon"></i></a>
+      </div>
     <% } %>
   </div>
   
@@ -42,7 +41,7 @@
           alt="avatar"
         />
       </a>
-      <div class="player-name"><%= player.player_name %></div>
+      <div class="player-name"><a href='/players/delete/<%= player.player_id%>'><i class="trash icon"></i></a><%= player.player_name %></div>
     </div>
     <% if(i<9) { i++; } else { i = 0;}} %>
   </div>

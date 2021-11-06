@@ -2,13 +2,21 @@ const pool = require("../config/db");
 class Participations {
   static async generateScore(rallye) {
     pool.query(
-      "SELECT  * from participations where rallye_id = ? order by total_time desc",
+      "SELECT  * from participations where rallye_id = ? order by total_time asc",
       [rallye],
       (error, results) => {
         if (error) throw error;
-        let points = 0;
+        let i = 0;
+        
+        const scoring = [25, 22, 20, 16, 14, 12, 10, 6, 4, 2];
         for (const result of results) {
-          let data = [points, result.participation_id];
+          let score = 0;
+          if (i <= 9) {
+            score = scoring[i];
+          } else {
+            score = 0;
+          }
+          let data = [score, result.participation_id];
           pool.query(
             "UPDATE participations SET points = ? WHERE participation_id = ?",
             data,
@@ -16,10 +24,18 @@ class Participations {
               if (error) throw error;
             }
           );
-          points++;
+          i++;
         }
       }
     );
+  }
+
+  static async delete(id, rallyeId, cb) {
+    pool.query(
+      "DELETE FROM participations WHERE participation_id = ?", id, function (error) {
+        if (error) throw error;
+        cb(rallyeId);
+    })
   }
 
   static async create(player, rallye, minutes, seconds, milliseconds) {
@@ -41,15 +57,16 @@ class Participations {
       },
       function (error, results, fields) {
         if (error) throw error;
+        return results;
       }
     );
   }
   static async findAll(cb, id) {
     pool.query(
-      "SELECT player_name, rallye_name, points, minutes, seconds, milliseconds FROM participations " +
+      "SELECT participation_id, player_name, rallye_name, rallyes.rallye_id as rallyeId, points, minutes, seconds, milliseconds, total_time FROM participations " +
         "inner join players on players.player_id = participations.player_id " +
         "inner join rallyes on rallyes.rallye_id = participations.rallye_id " +
-        "where participations.rallye_id = ? order by points DESC",
+        "where participations.rallye_id = ? order by total_time asc",
       [id],
       (error, results) => {
         if (error) throw error;

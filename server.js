@@ -25,17 +25,28 @@ const participationsController = require("./controllers/participationsController
 
 router.route("/").get(indexController.ping);
 
+/* PlayersRoute */
 router.route("/players/insert").post(playersController.createPlayer);
 router.route("/players/form").get(playersController.form);
+router.route("/players/delete/:id").get(playersController.deletePlayer);
 
+
+/* ParticipationsRoutes */
 router
   .route("/participations/get/:id")
   .get(participationsController.getParticipationsByRallye);
 router.route("/participations/form").get(participationsController.form);
+router.route("/participations/form/:rallye").get(participationsController.form);
 router
   .route("/participations/insert")
   .post(participationsController.createParticipation);
 router.route("/generalRanking").get(participationsController.getGeneralRanking);
+router
+  .route("/participations/delete/:rallyeId/:id")
+  .get(participationsController.deleteParticipation);
 
+/* RallyesRoutes */
 router.route("/rallyes/insert").post(rallyesController.createRallye);
 router.route("/rallyes/form").get(rallyesController.form);
+router.route("/rallyes/delete/:id").get(rallyesController.deleteRallye);
+

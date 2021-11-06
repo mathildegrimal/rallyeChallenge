@@ -79,6 +79,9 @@ html{
   display: flex;
   flex-direction: row;
   margin-bottom: 50px;
+  column-gap:20px;
+  row-gap : 20px;
+  flex-wrap: wrap;
 }
 
 .rallye {
@@ -124,11 +127,16 @@ html{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70px;
+  width: 90px;
 }
 .input {
   display: flex;
-  max-width: 70px;
+  max-width: 90px;
+  align-items: center;
+}
+.select-input {
+  display: flex;
+  max-width: 200px;
   align-items: center;
 }
 .classement-header-item {

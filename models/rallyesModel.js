@@ -5,8 +5,20 @@ class Rallyes {
     pool.query(
       "INSERT INTO rallyes SET ?",
       { rallye_name: name },
-      function (error, results, fields) {
+      function (error, results) {
         if (error) throw error;
+        return results;
+      }
+    );
+  }
+
+  static async delete(id, cb) {
+    pool.query(
+      "DELETE FROM rallyes WHERE rallye_id = ?",
+      id,
+      function (error) {
+        if (error) cb();
+        cb();
       }
     );
   }

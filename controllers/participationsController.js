@@ -2,6 +2,28 @@ const participationsModel = require("../models/participationsModel");
 const players = require("../models/playersModel");
 const rallyes = require("../models/rallyesModel");
 
+async function deleteParticipation(req, res) {
+  participationsModel.delete(
+    req.params.id,
+    req.params.rallyeId,
+    function (rallyeId) {
+      participationsModel.findAll(function (participations) {
+        if (participations.length === 0) {
+          participations.push({
+            rallye_name: "Aucune participation",
+            player_name: "aucun",
+            points: "aucun",
+            minutes: 0,
+            seconds: 0,
+            milliseconds: 0,
+          });
+        }
+        res.render("pages/participations", { participations: participations });
+      }, rallyeId);
+    }
+  );
+}
+
 async function getParticipationsByRallye(req, res) {
   participationsModel.findAll(function (participations) {
     if (participations.length === 0) {
@@ -25,12 +47,18 @@ async function getGeneralRanking(req, res) {
 }
 
 async function form(req, res) {
+  console.log(req.params.rallye);
   players.findAll(function (players) {
     rallyes.findAll(function (rallyes) {
-      res.render("pages/participationsForm", {
+      let data = {
         players: players,
         rallyes: rallyes,
-      });
+        rallyeSelected: null,
+      };
+      if (req.params.rallye) {
+        data.rallyeSelected = req.params.rallye
+      }
+      res.render("pages/participationsForm", data);
     });
   });
 }
@@ -68,6 +96,7 @@ async function createParticipation(req, res) {
 
 
 exports.getParticipationsByRallye = getParticipationsByRallye;
+exports.deleteParticipation = deleteParticipation;
 exports.createParticipation = createParticipation;
 exports.getGeneralRanking = getGeneralRanking;
 exports.form = form;
