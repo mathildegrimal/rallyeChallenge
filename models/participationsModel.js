@@ -7,11 +7,11 @@ class Participations {
       (error, results) => {
         if (error) throw error;
         let i = 0;
-        
-        const scoring = [25, 22, 20, 16, 14, 12, 10, 6, 4, 2];
+
+        const scoring = [25, 20, 16, 10, 8, 6, 4, 2];
         for (const result of results) {
           let score = 0;
-          if (i <= 9) {
+          if (i <= 7) {
             score = scoring[i];
           } else {
             score = 0;
@@ -32,10 +32,13 @@ class Participations {
 
   static async delete(id, rallyeId, cb) {
     pool.query(
-      "DELETE FROM participations WHERE participation_id = ?", id, function (error) {
+      "DELETE FROM participations WHERE participation_id = ?",
+      id,
+      function (error) {
         if (error) throw error;
         cb(rallyeId);
-    })
+      }
+    );
   }
 
   static async create(player, rallye, minutes, seconds, milliseconds) {
@@ -61,13 +64,23 @@ class Participations {
       }
     );
   }
-  static async findAll(cb, id) {
+  static async findAllByRallye(cb, id) {
     pool.query(
       "SELECT participation_id, player_name, rallye_name, rallyes.rallye_id as rallyeId, points, minutes, seconds, milliseconds, total_time FROM participations " +
         "inner join players on players.player_id = participations.player_id " +
         "inner join rallyes on rallyes.rallye_id = participations.rallye_id " +
         "where participations.rallye_id = ? order by total_time asc",
       [id],
+      (error, results) => {
+        if (error) throw error;
+        cb(results);
+      }
+    );
+  }
+
+  static async findAll(cb) {
+    pool.query(
+      "SELECT * FROM participations",
       (error, results) => {
         if (error) throw error;
         cb(results);

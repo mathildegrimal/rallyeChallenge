@@ -7,37 +7,44 @@ async function deleteParticipation(req, res) {
     req.params.id,
     req.params.rallyeId,
     function (rallyeId) {
-      participationsModel.findAll(function (participations) {
-        if (participations.length === 0) {
-          participations.push({
-            rallye_name: "Aucune participation",
-            player_name: "aucun",
-            points: "aucun",
-            minutes: 0,
-            seconds: 0,
-            milliseconds: 0,
+      rallyes.findAll(function (rallyes) {
+        participationsModel.findAllByRallye(function (participations) {
+          if (participations.length === 0) {
+            participations.push({
+              rallye_name: "Aucune participation",
+              player_name: "aucun",
+              points: "aucun",
+              minutes: 0,
+              seconds: 0,
+              milliseconds: 0,
+            });
+          }
+          res.render("pages/participations", {
+            participations: participations,
+            rallyes: rallyes,
           });
-        }
-        res.render("pages/participations", { participations: participations });
-      }, rallyeId);
-    }
+        }, rallyeId);
+      });
+    }//fin cb delete
   );
 }
 
 async function getParticipationsByRallye(req, res) {
-  participationsModel.findAll(function (participations) {
-    if (participations.length === 0) {
-      participations.push({
-        rallye_name: "Aucune participation",
-        player_name: "aucun",
-        points: "aucun",
-        minutes: 0,
-        seconds: 0,
-        milliseconds: 0,
-      });
-    }
-    res.render("pages/participations", { participations: participations });
-  }, req.params.id);
+  rallyes.findAll(function (rallyes) {
+    participationsModel.findAllByRallye(function (participations) {
+      if (participations.length === 0) {
+        participations.push({
+          rallye_name: "Aucune participation",
+          player_name: "aucun",
+          points: "aucun",
+          minutes: 0,
+          seconds: 0,
+          milliseconds: 0,
+        });
+      }
+      res.render("pages/participations", { participations: participations, rallyes:rallyes });
+    }, req.params.id);
+  })
 }
 
 async function getGeneralRanking(req, res) {

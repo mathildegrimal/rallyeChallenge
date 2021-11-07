@@ -1,5 +1,13 @@
 <%- include('header') -%>
-
+<div class="menu-rallye">
+  <h4>Autres rallyes</h4>
+  <% for (rallye of rallyes) { %>
+    <% if (participations[0].rallye_name !== rallye.rallye_name) { %>
+    <a href="/participations/get/<%=rallye.rallye_id%>" class="header item"><%=rallye.rallye_name %></a>
+  <% } %>
+<%  } %>
+</div>
+ 
 <div class="ui main container">
   <h1 class="page-title">
     <% if(participations[0].rallye_name === "Aucune participation") { %> <%=
